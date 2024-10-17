@@ -5,10 +5,9 @@ import {
   SubTabsContent,
   SubTabsList,
   SubTabsTrigger,
-} from "@/components/ui/sub-tabs"; // Import Tabs components
-import Meter from "@/components/tabs/asset_management/stock_tracker/Meter";
-import Remote from "@/components/tabs/asset_management/stock_tracker/Remote";
-import Summary from "@/components/tabs/asset_management/stock_tracker/Summary";
+} from "@/components/ui/sub-tabs";
+import MasterData_Meter from "@/components/tabs/asset_management/master_data/MasterData_Meter";
+import MasterData_Remote from "@/components/tabs/asset_management/master_data/MasterData_Remote";
 
 const Page = () => {
   return (
@@ -22,10 +21,10 @@ const Page = () => {
 
         {/* Tab Content */}
         <SubTabsContent value="meter">
-          <Meter />
+          <MasterData_Meter/>
         </SubTabsContent>
         <SubTabsContent value="remote">
-          <Remote />
+          <MasterData_Remote/>
         </SubTabsContent>
       </SubTabs>
     </Card>

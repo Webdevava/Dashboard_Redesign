@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Topbar from "@/components/navigation/Topbar";
 import Sidebar from "@/components/navigation/Sidebar";
 import { useRouter } from "next/navigation";
@@ -23,39 +23,39 @@ import { Menu } from "lucide-react";
 
 export default function MainLayout({ children }) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-    const [tokenExpired, setTokenExpired] = useState(false);
-    const router = useRouter();
+  const [tokenExpired, setTokenExpired] = useState(false);
+  const router = useRouter();
 
-    useEffect(() => {
-      const checkAuth = () => {
-        const token = Cookies.get("token");
-        const expiry = Cookies.get("expiry");
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = Cookies.get("token");
+      const expiry = Cookies.get("expiry");
 
-        if (!token) {
-          // No token found, redirect to login
-          router.push("/login");
-        } else if (expiry && Date.now() > Number(expiry)) {
-          // Token expired
-          setTokenExpired(true);
-          clearAuthCookies();
-        }
-      };
-
-      checkAuth();
-    }, [router]);
-
-    const clearAuthCookies = () => {
-      Cookies.remove("token");
-      Cookies.remove("name");
-      Cookies.remove("role");
-      Cookies.remove("expiry");
-      Cookies.remove("email");
+      if (!token) {
+        // No token found, redirect to login
+        router.push("/login");
+      } else if (expiry && Date.now() > Number(expiry)) {
+        // Token expired
+        setTokenExpired(true);
+        clearAuthCookies();
+      }
     };
 
-    const handleLoginRedirect = () => {
-      setTokenExpired(false);
-      router.push("/login");
-    };
+    checkAuth();
+  }, [router]);
+
+  const clearAuthCookies = () => {
+    Cookies.remove("token");
+    Cookies.remove("name");
+    Cookies.remove("role");
+    Cookies.remove("expiry");
+    Cookies.remove("email");
+  };
+
+  const handleLoginRedirect = () => {
+    setTokenExpired(false);
+    router.push("/login");
+  };
 
   const toggleMobileSidebar = () =>
     setIsMobileSidebarOpen(!isMobileSidebarOpen);
@@ -65,7 +65,7 @@ export default function MainLayout({ children }) {
       <Topbar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-      
+
         <div className="flex-1 overflow-auto p-4">
           <Toaster />
           <AlertDialog open={tokenExpired} onOpenChange={setTokenExpired}>
@@ -84,7 +84,9 @@ export default function MainLayout({ children }) {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-          {children}
+
+          {/* Suspense added here for children */}
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+'use client'
 import AlertsSlider from '@/components/cards/AlertsSlider'
 import APMStatistics from '@/components/charts/APMStatistics'
 import dynamic from 'next/dynamic';
