@@ -324,7 +324,7 @@ export default function Topbar({ toggleSidebar }) {
         </Button>
         <div className="flex items-center gap-2">
           <Image
-            src="/images/inditronics-logo.png "
+            src="/images/inditronics_logo.svg"
             height={40}
             width={40}
             alt="logo"
