@@ -18,6 +18,8 @@ import { ArrowLeft, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://apmapis.webdevava.live/api";
 
 const DevicePage = () => {
   const { deviceId } = useParams();
@@ -57,13 +59,13 @@ const DevicePage = () => {
   const fetchData = async () => {
     try {
       const logoResponse = await fetch(
-        `http://localhost:5000/api/events/logo?deviceId=${deviceId}`
+        `${API_URL}/events/logo?deviceId=${deviceId}`
       );
       const logoResult = await logoResponse.json();
       setLogoData(logoResult.data);
 
       const afpResponse = await fetch(
-        `http://localhost:5000/api/events/afp?deviceId=${deviceId}`
+        `${API_URL}/events/afp?deviceId=${deviceId}`
       );
       const afpResult = await afpResponse.json();
       setAudioData(afpResult.data);
