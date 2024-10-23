@@ -82,7 +82,7 @@ export default function SensorData() {
   const [chartType, setChartType] = useState("line");
 
   const fetchData = async () => {
-    let url = `${process.env.NEXT_PUBLIC_API_URL}/api/sensor/live?page=${currentPage}&limit=20`;
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/sensor/live?page=${currentPage}&limit=20`;
     if (startDate && endDate) {
       url += `&startTime=${startDate.toISOString()}&endTime=${endDate.toISOString()}`;
     }
@@ -159,7 +159,7 @@ export default function SensorData() {
   const fetchFanState = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/fan/state`
+        `${process.env.NEXT_PUBLIC_API_URL}/fan/state`
       );
       const result = await response.json();
       setFanState(result.state);
@@ -172,7 +172,7 @@ export default function SensorData() {
   const toggleFan = async (newState) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/fan/toggle`,
+        `${process.env.NEXT_PUBLIC_API_URL}/fan/toggle`,
         {
           method: "POST",
           headers: {

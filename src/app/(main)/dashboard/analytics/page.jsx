@@ -26,6 +26,8 @@ import {
 import { Thermometer, Zap, Droplet, Fan } from "lucide-react";
 import TemperatureThermometer from "@/components/charts/TemperatureThermometer";
 import OilLevelChart from "@/components/charts/OilLevelChart";
+import WeatherForecast from "@/components/cards/WeatherForecast";
+import PredictiveChart from "@/components/charts/PredictiveChart";
 
 // Data generation function
 const generateSyntheticData = (limit = 100) => {
@@ -285,46 +287,49 @@ export default function TransformerDashboard() {
         />
       </header>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Proactive Cooling System</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex justify-between w-full items-center">
-            <h1 className="text-2xl font-bold mb-4">
-              Fan Speed: {fanSpeed} RPM
-            </h1>
-            <Fan
-              className={`h-12 w-12 text-blue-500 ${
-                fanSpeed > 0 ? "animate-spin" : ""
-              }`}
-              style={{ animationDuration: `${2000 / fanSpeed}s` }}
-            />
-          </div>
-          <p className="text-muted-foreground mb-2">
-            {fanSpeed > 0
-              ? "The cooling system is actively maintaining optimal temperature levels."
-              : "The cooling system is currently inactive as the temperature is below 70°C."}
-          </p>
-          <div className="bg-secondary p-4 rounded-md">
-            <h4 className="font-semibold mb-2">System Status:</h4>
-            <ul className="list-disc list-inside">
-              <li>
-                Temperature:{" "}
-                {data.length > 0
-                  ? data[data.length - 1].temperature < 70
-                    ? "Normal"
-                    : "Elevated"
-                  : "N/A"}
-              </li>
-              <li>Oil Flow: Optimal</li>
-              <li>Efficiency: 95%</li>
-            </ul>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="flex gap-4 ">
+        <WeatherForecast />
+        <Card className="flex-1">
+          <CardHeader>
+            <CardTitle>Proactive Cooling System</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-between w-full items-center">
+              <h1 className="text-2xl font-bold mb-4">
+                Fan Speed: {fanSpeed} RPM
+              </h1>
+              <Fan
+                className={`h-12 w-12 text-blue-500 ${
+                  fanSpeed > 0 ? "animate-spin" : ""
+                }`}
+                style={{ animationDuration: `${2000 / fanSpeed}s` }}
+              />
+            </div>
+            <p className="text-muted-foreground mb-2">
+              {fanSpeed > 0
+                ? "The cooling system is actively maintaining optimal temperature levels."
+                : "The cooling system is currently inactive as the temperature is below 70°C."}
+            </p>
+            <div className="bg-secondary p-4 rounded-md">
+              <h4 className="font-semibold mb-2">System Status:</h4>
+              <ul className="list-disc list-inside">
+                <li>
+                  Temperature:{" "}
+                  {data.length > 0
+                    ? data[data.length - 1].temperature < 70
+                      ? "Normal"
+                      : "Elevated"
+                    : "N/A"}
+                </li>
+                <li>Oil Flow: Optimal</li>
+                <li>Efficiency: 95%</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
-      <Card >
+      {/* <Card >
         <CardHeader>
           <CardTitle>Live Readings</CardTitle>
         </CardHeader>
@@ -332,7 +337,7 @@ export default function TransformerDashboard() {
           <TemperatureThermometer temperature={currentTemperature} />
           <OilLevelChart oilLevel={currentOilLevel} />
         </CardContent>
-      </Card>
+      </Card> */}
 
       <hr className="my-6" />
       <div>
@@ -355,6 +360,15 @@ export default function TransformerDashboard() {
             </SelectContent>
           </Select>
         </div>
+
+        {/* <Card>
+          <CardHeader>
+            <CardTitle>Predictive Analysis</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <PredictiveChart data={predictFutureData(data)} />
+          </CardContent>
+        </Card> */}
 
         <div className="grid gap-4 grid-cols mb-8">
           <Card>
