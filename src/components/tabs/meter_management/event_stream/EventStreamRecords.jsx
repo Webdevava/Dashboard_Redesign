@@ -508,12 +508,8 @@ export default function EventStreamRecords() {
                   <div className="grid grid-cols-4 items-center gap-4">
                     <Label className="text-right font-bold">Timestamp:</Label>
                     <div className="col-span-3">
-                      {format(new Date(selectedEvent.TS), "PPpp")}
+                      {formatTimestamp(selectedEvent.TS)}
                     </div>
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label className="text-right font-bold">Event Type:</Label>
-                    <div className="col-span-3">{selectedEvent.eventName}</div>
                   </div>
                   {Object.entries(selectedEvent).map(([key, value]) => (
                     <div
