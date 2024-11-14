@@ -9,6 +9,7 @@ const tabs = [
   { name: "Overview", href: "/dashboard/overview" },
   { name: "Live Charts", href: "/dashboard/live-charts" },
   { name: "Analytics", href: "/dashboard/analytics" },
+  { name: "Radio", href: "/dashboard/radio" },
 ];
 
 export default function Layout({ children }) {

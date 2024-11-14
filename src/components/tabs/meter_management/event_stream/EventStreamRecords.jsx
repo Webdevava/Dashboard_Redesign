@@ -121,10 +121,18 @@ export default function EventStreamRecords() {
     return Object.keys(event).filter((key) => !excludedKeys.includes(key));
   };
 
+    const formatTimestamp = (timestamp) => {
+      // Check if timestamp is in milliseconds or seconds
+      const date = new Date(
+        timestamp * (timestamp.toString().length <= 10 ? 1000 : 1)
+      );
+      return format(date, "PPpp");
+    };
+
   const handleSearch = () => {
     setCurrentPage(1);
     setSearchParams({
-      DEVICE_ID: searchDeviceId || filterDeviceId,
+      deviceId: searchDeviceId || filterDeviceId,
       eventName: filterEventType,
       dateFrom: filterDateFrom,
       dateTo: filterDateTo,
@@ -462,9 +470,7 @@ export default function EventStreamRecords() {
                   </TableCell>
                   <TableCell>{event.DEVICE_ID}</TableCell>
                   <TableCell>
-                    {event.TS
-                      ? format(new Date(event.TS), "MM/dd/yy hh:mm:ss a")
-                      : "N/A"}
+                    {event.TS ? formatTimestamp(event.TS) : "N/A"}
                   </TableCell>
                   <TableCell>{event.Event_Name}</TableCell>
                   <TableCell
