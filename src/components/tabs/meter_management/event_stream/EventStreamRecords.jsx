@@ -501,7 +501,7 @@ export default function EventStreamRecords() {
             <div className="grid gap-4 py-4">
               {selectedEvent && (
                 <>
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  {/* <div className="grid grid-cols-4 items-center gap-4">
                     <Label className="text-right font-bold">Device ID:</Label>
                     <div className="col-span-3">{selectedEvent.DEVICE_ID}</div>
                   </div>
@@ -510,7 +510,7 @@ export default function EventStreamRecords() {
                     <div className="col-span-3">
                       {formatTimestamp(selectedEvent.TS)}
                     </div>
-                  </div>
+                  </div> */}
                   {Object.entries(selectedEvent).map(([key, value]) => (
                     <div
                       key={key}
