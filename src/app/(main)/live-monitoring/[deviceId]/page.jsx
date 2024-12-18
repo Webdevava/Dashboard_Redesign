@@ -125,7 +125,7 @@ const DevicePage = () => {
           <ScrollArea className="h-[40vh]">
             <Table>
               <TableBody className="border rounded-b-2xl">
-                {sortedData(data).map((item, index) => (
+                {sortedData(data)?.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell className="font-medium">
                       {new Date(item.TS * 1000).toLocaleString("en-US", {

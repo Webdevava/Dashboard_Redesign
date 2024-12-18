@@ -223,7 +223,7 @@ const BarChart = ({ logoData, audioData }) => {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    const processedData = logoData.map((logo, index) => ({
+    const processedData = logoData?.map((logo, index) => ({
       timestamp: new Date(logo.TS).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
